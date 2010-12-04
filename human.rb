@@ -9,7 +9,7 @@ class Human
     puts "Player #{@player.player_number}'s turn"
     puts "Last played: #{@player.play_area[@player.opponent][-1]}"
     puts "Cards in hand:"
-    @hand.each_index do |index|
+    @player.hand.each_index do |index|
       print "##{index}:"
       print " #{@player.hand[index]} \n"
     end

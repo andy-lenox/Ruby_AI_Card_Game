@@ -34,8 +34,11 @@ class Game
   end
   
   def begin_game
-    while !(@player1.dead and @player2.dead)
+    continue = true
+    while continue
+      print_state
       turn
+      continue = false if (@player1.dead or @player2.dead)
     end
     end_game
   end
@@ -63,8 +66,8 @@ class Game
   end
   
   def clear_play_area
-    @player1.removed = @play_area[1] + @player1.removed
-    @player2.removed = @play_area[2] + @player2.removed
+    @player1.discard = @play_area[1] + @player1.discard
+    @player2.discard = @play_area[2] + @player2.discard
   end
   
   def end_game
