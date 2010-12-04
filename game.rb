@@ -5,7 +5,7 @@ class Game
   def initialize(p_1_card=nil, p_2_card=nil, p1_controller=:human, p2_controller=:human )
     @play_area = {1 => [], 2 => []}
     @player1 = Player.new(p_1_card, 1, p1_controller, @play_area)
-    @player2 = Player.new(p_2_card, 2, p1_controller, @play_area)
+    @player2 = Player.new(p_2_card, 2, p2_controller, @play_area)
     @current_player = @player1
   end
   
@@ -69,9 +69,9 @@ class Game
   
   def end_game
     if @player1.dead
-      @winner = @player1
-    elsif @player1.dead
       @winner = @player2
+    elsif @player2.dead
+      @winner = @player1
     else
       "game ended prematurely"
     end
