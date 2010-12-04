@@ -47,8 +47,8 @@ class TestGame < Test::Unit::TestCase
     game.play_area[2].push(0)
     game.player1.hand[0] = 6
     game.player1.play_card(0)
-    game.player1.check_state
-    assert_equal(34,game.player1.life)
+    game.check_state
+    assert_equal(32,game.player1.life)
   end
   
   def teardown

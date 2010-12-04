@@ -55,9 +55,9 @@ class TestPlayer < Test::Unit::TestCase
   
   def test_controller
     p = Player.new
-    assert_equal(:human, p.controller)
+    assert_equal(:human, p.controller_type)
     p = Player.new(nil,1,:robot)
-    assert_equal(:robot, p.controller)
+    assert_equal(:robot, p.controller_type)
   end
   
   def test_play_area
