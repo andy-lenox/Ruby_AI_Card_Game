@@ -1,25 +1,26 @@
 require File.dirname(__FILE__) + '/game.rb'
 
-game = nil
-game = Game.new(nil,nil,:human, :robot)
+p1wins = 0
+p2wins = 0
 
-=begin
-if ARGV.empty?
-  game = Game.new
-  puts "Player1: Human"
-  puts "Player2: Human"
-elsif ARGV.size == 1
-  puts "Player1: Human"
-  puts "Player2: #{ARGV[1]}"
-  game = Game.new(nil,nil,:human, :robot)
-elsif ARGV.size == 2  
-  puts "Player1: #{ARGV[1]}"
-  puts "Player2: #{ARGV[2]}"
+(1..10000).each do |game_no|
+  game = nil
   game = Game.new(nil,nil,:robot, :robot)
-else
-  puts "invalid arguments"
-  return 0
+  game.setup
+  game.begin_game
+  
+  if game.winner.player_number == 1
+    p1wins += 1
+  end
+  if game.winner.player_number == 2
+    p2wins += 1
+  end
+  
+  open('random_stats.csv', 'a') { |f|
+    f.puts "#{game_no}, #{game.winner.player_number}, #{game.stats[1][:blocks]}, #{game.stats[1][:hits].size}, #{game.stats[2][:blocks]}, #{game.stats[2][:hits].size}"
+  }
 end
-=end
-game.setup
-game.begin_game
+
+open('random_stats.csv', 'a') { |f|
+   f.puts "Player 1 wins: #{p1wins}, Player 2 wins: #{p2wins}"
+}

@@ -106,7 +106,11 @@ class Player
     #
     @controller.turn
   end
-
+  
+  def discard
+    @discard << @hand.pop
+  end
+  
   #players have life equal to non-removed cards
   def life
     40 - @removed.size

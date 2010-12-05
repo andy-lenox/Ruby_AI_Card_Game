@@ -16,7 +16,7 @@ class Robot
     unless @player.hand.empty?
       choice = nil
       while choice.nil?
-        choice = make choice
+        choice = make_choice
       end
       
       if !@player.hand[choice].nil?
