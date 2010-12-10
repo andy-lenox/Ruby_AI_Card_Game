@@ -2,12 +2,12 @@ require File.dirname(__FILE__) + '/human.rb'
 require File.dirname(__FILE__) + '/robot.rb'
 
 class Player
-  attr_reader :starting_cards, :deck, :hand, :player_number, :controller_type, :play_area, :opponent
-  attr_accessor :hand_size, :removed, :discard
+  attr_reader :starting_cards, :deck, :player_number, :controller_type, :opponent
+  attr_accessor :hand_size, :removed, :discard, :robot_type, :controller, :hand, :play_area
 
   @@total_players = 0
 
-  def initialize( cards=nil, player_number=1, controller=:human, play_area=nil )
+  def initialize( cards=nil, player_number=1, controller=:human, play_area=nil, robot_type=nil )
     @@total_players += 1
     #if cards aren't given to the player
     #use default deck
@@ -32,6 +32,7 @@ class Player
     @discard        = []                  #after play area is cleared cards go here
     @controller_type = controller          #symbol for wether human or AI controlled
     @removed        = []                  #cards removed from game due to damage 
+    @robot_type = robot_type
 
     if @player_number == 1
       @opponent = 2
@@ -39,11 +40,13 @@ class Player
       @opponent = 1
     end
 
+    puts "robot type #{@robot_type}"
+
     #initialize controller type
     if @controller_type == :human
       @controller = Human.new(self)
     else
-      @controller = Robot.new(self)
+      @controller = Robot.new(self, robot_type)
     end
   end
 
@@ -75,9 +78,10 @@ class Player
 
   #shuffle your deck and draw
   #to max hand size
-  def start_game
+  def start_game(type = nil)
     @deck.shuffle!
     draw_to
+    @controller.type = nil;
   end
 
   #return to the state after initialization

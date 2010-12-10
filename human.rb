@@ -1,5 +1,10 @@
 class Human
   
+  attr_accessor :type
+  
+  @type = :none
+  
+  
   def initialize(player)
     @player = player
   end

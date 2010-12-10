@@ -2,10 +2,10 @@ require File.dirname(__FILE__) + '/player.rb'
 
 class Game
   attr_accessor :player1, :player2, :play_area, :winner, :stats
-  def initialize(p_1_card=nil, p_2_card=nil, p1_controller=:human, p2_controller=:human )
+  def initialize(p_1_card = nil, p_2_card = nil, p1_controller = :human, p1_controller_type = :rand, p2_controller = :human, p2_controller_type = :rand )
     @play_area = {1 => [], 2 => []}
-    @player1 = Player.new(p_1_card, 1, p1_controller, @play_area)
-    @player2 = Player.new(p_2_card, 2, p2_controller, @play_area)
+    @player1 = Player.new(p_1_card, 1, p1_controller, @play_area, p1_controller_type)
+    @player2 = Player.new(p_2_card, 2, p2_controller, @play_area, p2_controller_type)
     @current_player = @player1
     @p1stats = {:blocks => 0, :hits => []}
     @p2stats = {:blocks => 0, :hits => []}
